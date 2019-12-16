@@ -2,13 +2,17 @@ package br.com.ottimizza.depara.domain.dtos;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class DeParaContaDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,8 +31,8 @@ public class DeParaContaDTO implements Serializable {
 
     private String username;
 
-    private LocalDate dataCriacao;
+    private LocalDateTime dataCriacao;
 
-    private LocalDate dataAtualizacao;
+    private LocalDateTime dataAtualizacao;
 
 }

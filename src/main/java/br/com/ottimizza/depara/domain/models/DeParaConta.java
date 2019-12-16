@@ -2,27 +2,32 @@ package br.com.ottimizza.depara.domain.models;
 
 import java.io.Serializable;
 import java.math.BigInteger;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "depara_contas")
+@Table(name = "depara_contas", indexes = {
+    @Index(name = "depara_contas", columnList = "cnpj_contabilidade,cnpj_empresa,descricao")
+})
 @Builder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class DeParaConta implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,20 +54,24 @@ public class DeParaConta implements Serializable {
     private String username;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDate dataCriacao;
+    private LocalDateTime dataCriacao;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDate dataAtualizacao;
+    private LocalDateTime dataAtualizacao;
 
     @PreUpdate
     @PrePersist
     public void atualizaTimestamps() {
+        // Strings
+        descricao = descricao.toUpperCase();
+        cnpjContabilidade = cnpjContabilidade.replaceAll("\\D*", "");
+        cnpjEmpresa = cnpjEmpresa.replaceAll("\\D*", "");
+
+        // Timestamps
         if (dataCriacao == null) {
-            dataCriacao = LocalDate.now();
+            dataCriacao = LocalDateTime.now();
         }
-        dataAtualizacao = LocalDate.now();
+        dataAtualizacao = LocalDateTime.now();
     }
 
 }

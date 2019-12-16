@@ -25,6 +25,16 @@ public class ExceptionHandling {
         return error(INTERNAL_SERVER_ERROR, "internal_server_error", e.getMessage(), e);
     }
 
+    @ExceptionHandler({ AccessDeniedException.class })
+    public HttpEntity<?> handleAccessDeniedException(AccessDeniedException e, Locale locale) {
+        return error(BAD_REQUEST, "access_denied", e.getMessage(), e);
+    }
+
+    @ExceptionHandler({ IllegalArgumentException.class })
+    public HttpEntity<?> handleIllegalArgumentException(RuntimeException e, Locale locale) {
+        return error(BAD_REQUEST, "illegal_arguments", e.getMessage(), e);
+    }
+
     private HttpEntity<?> error(HttpStatus status, String error, String errorDescription, Exception e) {
         e.printStackTrace();
         ErrorResponse response = new ErrorResponse(error, errorDescription);
