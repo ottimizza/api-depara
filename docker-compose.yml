@@ -1,0 +1,9 @@
+version: "3.0"
+
+services:
+  web:
+    env_file:
+      - .env
+    image: ottimizza-depara-service:latest
+    ports:
+      - 9476:9476
