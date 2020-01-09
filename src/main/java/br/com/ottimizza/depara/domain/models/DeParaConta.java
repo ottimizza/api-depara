@@ -37,17 +37,19 @@ public class DeParaConta implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "depara_contas_sequence")
     private BigInteger id;
 
-    @Column(nullable = false)
+    @Column(name = "cnpj_contabilidade", nullable = false)
     private String cnpjContabilidade;
 
-    @Column(nullable = false)
+    @Column(name = "cnpj_empresa", nullable = false)
     private String cnpjEmpresa;
 
     @Column(nullable = false)
     private String descricao;
 
+    @Column(name = "conta_debito")
     private String contaDebito;
 
+    @Column(name = "conta_credito")
     private String contaCredito;
 
     @Column(nullable = false)
