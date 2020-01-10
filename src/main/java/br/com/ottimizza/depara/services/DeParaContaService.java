@@ -43,13 +43,23 @@ public class DeParaContaService {
         String contaCredito = deParaContaDTO.getContaCredito();
         String contaDebito = deParaContaDTO.getContaDebito();
 
+        System.out.println(deParaConta != null);
+
         if (deParaConta != null) {
+
+            System.out.println(">> " + contaDebito);
+            System.out.println(">> " + contaCredito);
+            
             deParaConta.toBuilder()
                 .contaCredito(
                     (contaCredito == null || contaCredito.isEmpty()) ? deParaConta.getContaCredito() : contaCredito)
                 .contaDebito(
                     (contaDebito == null || contaDebito.isEmpty()) ? deParaConta.getContaDebito() : contaDebito)
                 .build();
+
+            System.out.println(">> >> " + deParaConta.getContaDebito());
+            System.out.println(">> >> " + deParaConta.getContaCredito());
+            
         } else {
             deParaConta = DeParaContaMapper
                 .fromDTO(deParaContaDTO)
