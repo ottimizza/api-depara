@@ -33,6 +33,9 @@ public class DeParaContaService {
     }
 
     public DeParaContaDTO criar(DeParaContaDTO deParaContaDTO, Principal principal) throws Exception { // @formatter:off
+        deParaContaDTO.setCnpjContabilidade(deParaContaDTO.getCnpjContabilidade().replaceAll("\\D*", ""));
+        deParaContaDTO.setCnpjEmpresa(deParaContaDTO.getCnpjEmpresa().replaceAll("\\D*", ""));
+
         DeParaConta deParaConta = deParaContaRepository.buscarPorContabilidadeEmpresaEDescricao(
             deParaContaDTO.getCnpjContabilidade(), deParaContaDTO.getCnpjEmpresa(), deParaContaDTO.getDescricao()
         );
