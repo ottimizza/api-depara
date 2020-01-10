@@ -50,12 +50,15 @@ public class DeParaContaService {
             System.out.println(">> " + contaDebito);
             System.out.println(">> " + contaCredito);
             
-            deParaConta.toBuilder()
+            deParaConta = deParaConta.toBuilder()
                 .contaCredito(
                     (contaCredito == null || contaCredito.isEmpty()) ? deParaConta.getContaCredito() : contaCredito)
                 .contaDebito(
                     (contaDebito == null || contaDebito.isEmpty()) ? deParaConta.getContaDebito() : contaDebito)
                 .build();
+            
+            // deParaConta.setContaCredito((contaCredito == null || contaCredito.isEmpty()) ? deParaConta.getContaCredito() : contaCredito);
+            // deParaConta.setContaDebito((contaDebito == null || contaDebito.isEmpty()) ? deParaConta.getContaDebito() : contaDebito);
 
             System.out.println(">> >> " + deParaConta.getContaDebito());
             System.out.println(">> >> " + deParaConta.getContaCredito());
