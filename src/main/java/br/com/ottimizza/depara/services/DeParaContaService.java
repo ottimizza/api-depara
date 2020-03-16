@@ -33,6 +33,9 @@ public class DeParaContaService {
     }
 
     public DeParaContaDTO criar(DeParaContaDTO deParaContaDTO, Principal principal) throws Exception { // @formatter:off
+        deParaContaDTO.setCnpjContabilidade(deParaContaDTO.getCnpjContabilidade().replaceAll("\\D*", ""));
+        deParaContaDTO.setCnpjEmpresa(deParaContaDTO.getCnpjEmpresa().replaceAll("\\D*", ""));
+
         DeParaConta deParaConta = deParaContaRepository.buscarPorContabilidadeEmpresaEDescricao(
             deParaContaDTO.getCnpjContabilidade(), deParaContaDTO.getCnpjEmpresa(), deParaContaDTO.getDescricao()
         );
@@ -40,13 +43,26 @@ public class DeParaContaService {
         String contaCredito = deParaContaDTO.getContaCredito();
         String contaDebito = deParaContaDTO.getContaDebito();
 
+        System.out.println(deParaConta != null);
+
         if (deParaConta != null) {
-            deParaConta.toBuilder()
+
+            System.out.println(">> " + contaDebito);
+            System.out.println(">> " + contaCredito);
+            
+            deParaConta = deParaConta.toBuilder()
                 .contaCredito(
                     (contaCredito == null || contaCredito.isEmpty()) ? deParaConta.getContaCredito() : contaCredito)
                 .contaDebito(
                     (contaDebito == null || contaDebito.isEmpty()) ? deParaConta.getContaDebito() : contaDebito)
                 .build();
+            
+            // deParaConta.setContaCredito((contaCredito == null || contaCredito.isEmpty()) ? deParaConta.getContaCredito() : contaCredito);
+            // deParaConta.setContaDebito((contaDebito == null || contaDebito.isEmpty()) ? deParaConta.getContaDebito() : contaDebito);
+
+            System.out.println(">> >> " + deParaConta.getContaDebito());
+            System.out.println(">> >> " + deParaConta.getContaCredito());
+            
         } else {
             deParaConta = DeParaContaMapper
                 .fromDTO(deParaContaDTO)
