@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.security.Principal;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.http.HttpEntity;
@@ -51,5 +52,10 @@ public class DeParaContasController {
     public HttpEntity<?> atualizar(Principal principal) throws Exception {
         throw new NotYetImplementedException();
     }
-
+    
+    @GetMapping("/dePara")
+    public HttpEntity<?> buscaPorCnpjsDescricao(@Valid DeParaContaDTO filtro, Principal principal) throws Exception {
+    	return ResponseEntity.ok(deParaContaService.buscaPorDescricaoCnpjS(filtro));
+    }urn ResponseEntity.ok(deParaContaService.buscarPorContabilidadeEmpresaEDescricao(filtro.getCnpjContabilidade(), filtro.getCnpjEmpresa(), filtro.getDescricao()));                                                         
+    }
 }
