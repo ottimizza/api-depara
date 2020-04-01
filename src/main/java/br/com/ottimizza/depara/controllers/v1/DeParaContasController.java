@@ -56,6 +56,5 @@ public class DeParaContasController {
     @GetMapping("/dePara")
     public HttpEntity<?> buscaPorCnpjsDescricao(@Valid DeParaContaDTO filtro, Principal principal) throws Exception {
     	return ResponseEntity.ok(deParaContaService.buscaPorDescricaoCnpjS(filtro));
-    }urn ResponseEntity.ok(deParaContaService.buscarPorContabilidadeEmpresaEDescricao(filtro.getCnpjContabilidade(), filtro.getCnpjEmpresa(), filtro.getDescricao()));                                                         
     }
 }
