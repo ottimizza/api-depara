@@ -74,6 +74,17 @@ public class DeParaContaService {
         validaDeParaConta(deParaConta);
         return DeParaContaMapper.fromEntity(deParaContaRepository.save(deParaConta));
     }
+    
+    public DeParaContaDTO buscaPorDescricaoCnpjS(DeParaContaDTO filtro) throws Exception {
+    	DeParaConta DeParaConta = null;
+    	try {
+    		DeParaConta = deParaContaRepository.buscarPorContabilidadeEmpresaEDescricao(filtro.getCnpjContabilidade(), filtro.getCnpjEmpresa(), filtro.getDescricao());
+    	}
+    	catch(Exception ex) {
+    		throw new Exception("DeParaConta não encontrado!");
+    	}
+		return DeParaContaMapper.fromEntity(DeParaConta);
+    }
 
     private boolean validaDeParaConta(DeParaConta deParaConta) throws IllegalArgumentException {
         if (deParaConta.getCnpjContabilidade() == null || deParaConta.getCnpjContabilidade().equals("")) {
