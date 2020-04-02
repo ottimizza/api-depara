@@ -81,7 +81,7 @@ public class DeParaContaService {
     		DeParaConta = deParaContaRepository.buscarPorContabilidadeEmpresaEDescricao(filtro.getCnpjContabilidade(), filtro.getCnpjEmpresa(), filtro.getDescricao());
     	}
     	catch(Exception ex) {
-    		throw new Exception("DeParaConta não encontrado!");
+    		throw new IllegalArgumentException("DeParaConta não foi encontrado!");
     	}
 		return DeParaContaMapper.fromEntity(DeParaConta);
     }
