@@ -60,7 +60,7 @@ public class DeParaContasController {
     		deParaConta = deParaContaService.buscaPorDescricaoCnpjS(filtro);
     	}
     	catch(Exception ex) {
-    		ResponseEntity.ok("DeParaConta não encontrado!");
+    		ResponseEntity.ok(ex.getMessage());
     	}
     	return ResponseEntity.ok(deParaConta);
     }
