@@ -83,7 +83,7 @@ public class DeParaContaService {
     	catch(Exception ex) {
     		ex.getMessage();
     	}
-    	if(DeParaConta == null) throw new Exception("DeParaConta não foi encontrado!");
+    	if(DeParaConta == null) throw new IllegalArgumentException("DeParaConta não foi encontrado!");
 		return DeParaContaMapper.fromEntity(DeParaConta);
     }
 
