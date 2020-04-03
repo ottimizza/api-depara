@@ -55,14 +55,7 @@ public class DeParaContasController {
     
     @GetMapping("/dePara")
     public HttpEntity<?> buscaPorCnpjsDescricao(@Valid DeParaContaDTO filtro, Principal principal) throws Exception {
-    	DeParaContaDTO deParaConta = null;
-    	try {
-    		deParaConta = deParaContaService.buscaPorDescricaoCnpjS(filtro);
-    	}
-    	catch(Exception ex) {
-    		ResponseEntity.ok(ex.getMessage());
-    	}
-    	return ResponseEntity.ok(deParaConta);
+    	return ResponseEntity.ok(deParaContaService.buscaPorDescricaoCnpjS(filtro));
     }
 
 }
