@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "AccountWebService", url = "https://oauth.ottimizza.com.br")
+@FeignClient(name = "${oauth.service.name}", url = "${oauth.service.url}")
 public interface AccountFeignClient { // @formatter:off
 
+
+	
     @GetMapping("/api/v1/organizations")
     public ResponseEntity<String> getOrganizationByCNPJ(@RequestHeader("Authorization") String authorization, @RequestParam String cnpj);
 
