@@ -57,4 +57,5 @@ public class DeParaContasController {
     public HttpEntity<?> buscaPorCnpjsDescricao(@Valid DeParaContaDTO filtro, Principal principal) throws Exception {
     	return ResponseEntity.ok(deParaContaService.buscaPorDescricaoCnpjS(filtro));
     }
+
 }
