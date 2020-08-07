@@ -2,8 +2,10 @@ package br.com.ottimizza.depara.domain.exceptions;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.HttpServerErrorException.InternalServerError;
 
 import br.com.ottimizza.depara.domain.responses.ErrorResponse;
+import feign.FeignException.BadRequest;
 
 import org.springframework.http.HttpStatus;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
@@ -31,10 +33,15 @@ public class ExceptionHandling {
     }
 
     @ExceptionHandler({ IllegalArgumentException.class })
-    public HttpEntity<?> handleIllegalArgumentException(RuntimeException e, Locale locale) {
+    public HttpEntity<?> handleIllegalArgumentException(IllegalArgumentException e, Locale locale) {
         return error(BAD_REQUEST, "illegal_arguments", e.getMessage(), e);
     }
-
+    
+    @ExceptionHandler({ DeParaNotFoundException.class })
+    public HttpEntity<?> handleDeParaNotFoundException(DeParaNotFoundException e, Locale locale) {
+        return error(NOT_FOUND, "depara_not_found", e.getMessage(), e);
+    }
+    
     private HttpEntity<?> error(HttpStatus status, String error, String errorDescription, Exception e) {
         e.printStackTrace();
         ErrorResponse response = new ErrorResponse(error, errorDescription);
