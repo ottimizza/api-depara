@@ -51,7 +51,7 @@ public class DeParaContaRepositoryImpl implements DeParaContaRepositoryCustom {
 
         return query.fetchFirst();
     }
-
+    
     //
     //
     //

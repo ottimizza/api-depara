@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.ottimizza.depara.domain.dtos.DeParaContaDTO;
 import br.com.ottimizza.depara.domain.dtos.criterias.SearchCriteria;
 import br.com.ottimizza.depara.domain.responses.GenericPageableResponse;
+import br.com.ottimizza.depara.domain.responses.GenericResponse;
 import br.com.ottimizza.depara.services.DeParaContaService;
 
 @RestController // @formatter:off
@@ -53,9 +54,14 @@ public class DeParaContasController {
         throw new NotYetImplementedException();
     }
     
-    @GetMapping("/dePara")
+    @GetMapping("/unico")
     public HttpEntity<?> buscaPorCnpjsDescricao(@Valid DeParaContaDTO filtro, Principal principal) throws Exception {
     	return ResponseEntity.ok(deParaContaService.buscaPorDescricaoCnpjS(filtro));
+    }
+    
+    @GetMapping("/verifica")
+    public HttpEntity<?> verificaDePara(@Valid DeParaContaDTO filtro, Principal principal) throws Exception {
+    	return ResponseEntity.ok(deParaContaService.verificaDepara(filtro));
     }
 
 }

@@ -7,10 +7,13 @@ import javax.inject.Inject;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.ottimizza.depara.domain.dtos.DeParaContaDTO;
 import br.com.ottimizza.depara.domain.dtos.criterias.SearchCriteria;
+import br.com.ottimizza.depara.domain.exceptions.DeParaNotFoundException;
 import br.com.ottimizza.depara.domain.mappers.DeParaContaMapper;
 import br.com.ottimizza.depara.domain.models.DeParaConta;
 import br.com.ottimizza.depara.repositories.DeParaContaRepository;
@@ -75,15 +78,12 @@ public class DeParaContaService {
         return DeParaContaMapper.fromEntity(deParaContaRepository.save(deParaConta));
     }
     
-    public DeParaContaDTO buscaPorDescricaoCnpjS(DeParaContaDTO filtro) throws Exception {
+    public DeParaContaDTO buscaPorDescricaoCnpjS(DeParaContaDTO filtro) throws DeParaNotFoundException, Exception {
     	DeParaConta DeParaConta = null;
-    	try {
-    		DeParaConta = deParaContaRepository.buscarPorContabilidadeEmpresaEDescricao(filtro.getCnpjContabilidade(), filtro.getCnpjEmpresa(), filtro.getDescricao());
-    	}
-    	catch(Exception ex) {
-    		ex.getMessage();
-    	}
-    	if(DeParaConta == null) throw new IllegalArgumentException("DeParaConta não foi encontrado!");
+    	
+    	DeParaConta = deParaContaRepository.buscarPorContabilidadeEmpresaEDescricao(filtro.getCnpjContabilidade(), filtro.getCnpjEmpresa(), filtro.getDescricao());
+    	
+    	if(DeParaConta == null)  throw new DeParaNotFoundException("DeParaConta não foi encontrado!");
 		return DeParaContaMapper.fromEntity(DeParaConta);
     }
 
@@ -102,6 +102,15 @@ public class DeParaContaService {
             throw new IllegalArgumentException("Informe a conta de crédito ou débito!");
         }
         return true;
+    }
+    
+    public long verificaDepara(DeParaContaDTO filtro) throws Exception{
+    	if (filtro.getDescricao().contains("PAG"))
+    		return deParaContaRepository.buscaQuantidadePag(filtro.getCnpjContabilidade(), filtro.getCnpjEmpresa());
+    	if (filtro.getDescricao().contains("REC"))
+    		return deParaContaRepository.buscaQuantidadeRec(filtro.getCnpjContabilidade(), filtro.getCnpjEmpresa());
+    	
+    	return (long) 0;
     }
 
     public DeParaContaDTO buscaPorDescricaoCnpjS(DeParaContaDTO filtro) {
