@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ottimizza.depara.domain.dtos.ParticipanteDTO;
+import br.com.ottimizza.depara.domain.responses.GenericPageableResponse;
 import br.com.ottimizza.depara.services.ParticipanteService;
 
 @RestController
@@ -53,7 +54,7 @@ public class ParticipanteController {
 															@RequestParam(name = "page_index", defaultValue = "0") int pageIndex,
 													        @RequestParam(name = "page_size", defaultValue = "10") int pageSize, 
 													        @RequestHeader("Authorization") String authorization) throws Exception {
-		return ResponseEntity.ok(service.buscarTodos(filter, pageIndex, pageSize, authorization));
+		return ResponseEntity.ok(new GenericPageableResponse<ParticipanteDTO>(service.buscarTodos(filter, pageIndex, pageSize, authorization)));
 	}
 	
 }
