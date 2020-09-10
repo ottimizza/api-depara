@@ -22,7 +22,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-@Table(name = "participantes", indexes = {@Index(name = "idx_participantes_participante_contabilidade", columnList = "cnpjParticipante,cnpjContabilidade", unique = true)})
+@Table(name = "participantes", indexes = {
+		@Index(name = "idx_participantes_participante_contabilidade", columnList = "cnpj_participante,cnpj_contabilidade", unique = true)})
 public class Participante implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -36,7 +37,7 @@ public class Participante implements Serializable{
 	@Column(name = "cnpj_contabilidade", length = 14)
 	private String cnpjContabilidade;
 	
-	@Column(name = "codigo_paricipante", length = 20)
+	@Column(name = "codigo_participante", length = 20)
 	private String codigoParicipante;
 	
 	@Column(name = "cnpj_participante", length = 20)
