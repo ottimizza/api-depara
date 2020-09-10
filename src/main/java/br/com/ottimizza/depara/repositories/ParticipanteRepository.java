@@ -14,7 +14,7 @@ import br.com.ottimizza.depara.domain.models.Participante;
 @Repository
 public interface ParticipanteRepository extends JpaRepository<Participante, BigInteger> {
 
-	  @Query(value = "SELECT p FROM participantes p WHERE p.cnpj_contabilidade = :cnpjContabilidade AND p.cnpj_participante = :cnpjParticipante ", 
+	  @Query(value = "SELECT p.* FROM participantes p WHERE p.cnpj_contabilidade = :cnpjContabilidade AND p.cnpj_participante = :cnpjParticipante ", 
 			 nativeQuery = true)
 	  Page<Participante> findByCnpjContabilidadeAndCnpjParticipante(@Param("cnpjContabilidade") String cnpjContabilidade, 
 			  														@Param("cnpjParticipante") String cnpjParticipante, 
