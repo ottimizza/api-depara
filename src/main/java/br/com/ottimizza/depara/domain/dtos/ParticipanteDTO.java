@@ -20,7 +20,7 @@ public class ParticipanteDTO implements Serializable{
 	
 	private String cnpjContabilidade;
 	
-	private String codigoParicipante;
+	private String codigoParticipante;
 	
 	private String cnpjParticipante;
 	

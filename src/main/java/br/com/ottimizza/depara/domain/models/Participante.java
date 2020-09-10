@@ -34,13 +34,13 @@ public class Participante implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "participante_sequence")
 	private BigInteger id;
 	
-	@Column(name = "cnpj_contabilidade", length = 14)
+	@Column(name = "cnpj_contabilidade", length = 14, nullable = false)
 	private String cnpjContabilidade;
 	
 	@Column(name = "codigo_participante", length = 20)
-	private String codigoParicipante;
+	private String 	codigoParticipante;
 	
-	@Column(name = "cnpj_participante", length = 20)
+	@Column(name = "cnpj_participante", length = 20, nullable = false)
 	private String cnpjParticipante;
 	
 	@Column(name = "descricao_continua", columnDefinition = "varchar(255) default ''")
