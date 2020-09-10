@@ -113,8 +113,8 @@ public class DeParaContaService {
     	return (long) 0;
     }
 
-    public DeParaContaDTO buscaPorDescricaoCnpjS(DeParaContaDTO filtro) {
-    	return DeParaContaMapper.fromEntity(deParaContaRepository.buscarPorContabilidadeEmpresaEDescricao(filtro.getCnpjContabilidade(), filtro.getCnpjEmpresa(), filtro.getDescricao()));
-    }
+//    public DeParaContaDTO buscaPorDescricaoCnpjS(DeParaContaDTO filtro) {
+//    	return DeParaContaMapper.fromEntity(deParaContaRepository.buscarPorContabilidadeEmpresaEDescricao(filtro.getCnpjContabilidade(), filtro.getCnpjEmpresa(), filtro.getDescricao()));
+//    }
 
 }
