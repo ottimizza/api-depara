@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.ottimizza.depara.domain.dtos.DeParaContaDTO;
 import br.com.ottimizza.depara.domain.dtos.criterias.SearchCriteria;
 import br.com.ottimizza.depara.domain.responses.GenericPageableResponse;
-import br.com.ottimizza.depara.domain.responses.GenericResponse;
 import br.com.ottimizza.depara.services.DeParaContaService;
 
 @RestController // @formatter:off
@@ -35,8 +34,7 @@ public class DeParaContasController {
     public HttpEntity<?> buscarTodos(@ModelAttribute DeParaContaDTO filtro, 
                                      @ModelAttribute SearchCriteria criteria, 
                                      Principal principal) throws Exception {
-        return ResponseEntity.ok(new GenericPageableResponse<DeParaContaDTO>(
-            deParaContaService.buscarTodos(filtro, criteria, principal)));
+        return ResponseEntity.ok(new GenericPageableResponse<DeParaContaDTO>(deParaContaService.buscarTodos(filtro, criteria, principal)));
     }
 
     @GetMapping("/{id}")

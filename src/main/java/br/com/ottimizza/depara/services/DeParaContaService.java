@@ -79,12 +79,12 @@ public class DeParaContaService {
     }
     
     public DeParaContaDTO buscaPorDescricaoCnpjS(DeParaContaDTO filtro) throws DeParaNotFoundException, Exception {
-    	DeParaConta DeParaConta = null;
+    	DeParaConta deParaConta = null;
     	
-    	DeParaConta = deParaContaRepository.buscarPorContabilidadeEmpresaEDescricao(filtro.getCnpjContabilidade(), filtro.getCnpjEmpresa(), filtro.getDescricao());
+    	deParaConta = deParaContaRepository.buscarPorContabilidadeEmpresaEDescricao(filtro.getCnpjContabilidade(), filtro.getCnpjEmpresa(), filtro.getDescricao());
     	
-    	if(DeParaConta == null)  throw new DeParaNotFoundException("DeParaConta não foi encontrado!");
-		return DeParaContaMapper.fromEntity(DeParaConta);
+    	if(deParaConta == null)  throw new DeParaNotFoundException("DeParaConta não foi encontrado!");
+		return DeParaContaMapper.fromEntity(deParaConta);
     }
 
     private boolean validaDeParaConta(DeParaConta deParaConta) throws IllegalArgumentException {
@@ -113,8 +113,8 @@ public class DeParaContaService {
     	return (long) 0;
     }
 
-    public DeParaContaDTO buscaPorDescricaoCnpjS(DeParaContaDTO filtro) {
-    	return DeParaContaMapper.fromEntity(deParaContaRepository.buscarPorContabilidadeEmpresaEDescricao(filtro.getCnpjContabilidade(), filtro.getCnpjEmpresa(), filtro.getDescricao()));
-    }
+//    public DeParaContaDTO buscaPorDescricaoCnpjS(DeParaContaDTO filtro) {
+//    	return DeParaContaMapper.fromEntity(deParaContaRepository.buscarPorContabilidadeEmpresaEDescricao(filtro.getCnpjContabilidade(), filtro.getCnpjEmpresa(), filtro.getDescricao()));
+//    }
 
 }

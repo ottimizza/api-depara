@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "depara_contas", indexes = {
-    @Index(name = "depara_contas", columnList = "cnpj_contabilidade,cnpj_empresa,descricao")
+    @Index(name = "idx_depara_contas_contab_empresa_descricao", columnList = "cnpj_contabilidade,cnpj_empresa,descricao")
 })
 @Builder(toBuilder = true)
 @NoArgsConstructor
