@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,9 +48,16 @@ public class DeParaContasController {
         return ResponseEntity.ok(deParaContaService.criar(deParaContaDTO, principal));
     }
 
-    @PutMapping
-    public HttpEntity<?> atualizar(Principal principal) throws Exception {
-        throw new NotYetImplementedException();
+    @PutMapping("/{id}")
+    public HttpEntity<?> atualizar(@PathVariable("id") BigInteger deParaId,
+                                   @RequestBody DeParaContaDTO deParaDto,
+                                   Principal principal) throws Exception {
+        return ResponseEntity.ok(deParaContaService.atualizarDePara(deParaId, deParaDto));
+    }
+
+    @DeleteMapping("/{id}")
+    public HttpEntity<?> deleta(@PathVariable("id") BigInteger deParaId) throws Exception {
+        return ResponseEntity.ok(deParaContaService.deletaPorId(deParaId));
     }
     
     @GetMapping("/unico")
