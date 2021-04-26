@@ -77,6 +77,17 @@ public class DeParaContaService {
         validaDeParaConta(deParaConta);
         return DeParaContaMapper.fromEntity(deParaContaRepository.save(deParaConta));
     }
+
+    public DeParaContaDTO atualizarDePara(BigInteger deParaId, DeParaContaDTO deParaDto) throws Exception {
+        DeParaConta dePara = deParaContaRepository.findById(deParaId).orElseThrow(() -> new DeParaNotFoundException("DeParaConta não foi encontrado!"));
+        DeParaContaDTO retorno = DeParaContaMapper.fromEntity(deParaContaRepository.save(deParaDto.patch(dePara)));
+        return retorno;
+    }
+
+    public String deletaPorId(BigInteger deParaId) throws Exception {
+        deParaContaRepository.deleteById(deParaId);
+        return "DeParaConta removido com sucesso!";
+    }
     
     public DeParaContaDTO buscaPorDescricaoCnpjS(DeParaContaDTO filtro) throws DeParaNotFoundException, Exception {
     	DeParaConta deParaConta = null;
