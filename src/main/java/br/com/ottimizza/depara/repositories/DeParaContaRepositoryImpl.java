@@ -60,7 +60,7 @@ public class DeParaContaRepositoryImpl implements DeParaContaRepositoryCustom {
             query.where(qDeParaConta.id.eq(filter.getId()));
 
         if (filter.getDescricao() != null && !filter.getDescricao().isEmpty())
-            query.where(qDeParaConta.descricao.like("%" + filter.getDescricao().toUpperCase() + "%"));
+            query.where(qDeParaConta.descricao.eq(filter.getDescricao().toUpperCase()));
 
         if (filter.getCnpjContabilidade() != null && !filter.getCnpjContabilidade().isEmpty())
             query.where(qDeParaConta.cnpjContabilidade.like(filter.getCnpjContabilidade()));
